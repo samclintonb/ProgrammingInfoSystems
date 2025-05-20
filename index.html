@@ -4,10 +4,190 @@
         <script src="index.js"></script>
         <script>alert("This is an inline script!")
                 let c=()=>{
-                    let i=document.getElementById('in').value
-                    alert(parseInt(i)+1);
+                    let i=(document.getElementById('in').value);
+		    if (isNaN(i)) {
+                	alert("Please enter a valid weight.");
+            		} else if (i <= 15) {
+                		alert("Baggage is allowed.");
+            		} else {
+                		alert("Baggage exceeds the 15kg limit!");
+            			}
+        	    }
+       	                            
+		let doIt=()=>{
+  			let sum = 0;
+      			for (let i = 0; i < 1000; i++) {
+        			if (i % 3 === 0 || i % 5 === 0) {
+          			sum += i;
+       	 			}
+      			}
+      			alert("The sum of all multiples of 3 or 5 below 1000 is: " + sum);
+    		}
+ function sumOfMultiples(a, b, n) {
+    let sum = 0;
+    for (let i = 1; i < n; i++) {
+      if (i % a === 0 || i % b === 0) {
+        sum += i;
+      }
+    }
+    return sum;
+  }
+
+  //Exercise 3
+  function showSum() {
+    let a = parseInt(document.getElementById("a").value);
+    let b = parseInt(document.getElementById("b").value);
+    let n = parseInt(document.getElementById("n").value);
+
+    if (isNaN(a) || isNaN(b) || isNaN(n)) {
+      alert("Please enter valid numbers for a, b, and n.");
+      return;
+    }
+
+    let result = sumOfMultiples(a, b, n);
+    alert("The sum of all multiples of " + a + " or " + b + " below " + n + " is: " + result);
+}
+    
+    //Exercise 4
+
+// Predefined array
+const array = [3, 5, 7, 10, 12, 15, 20];
+
+function f4(a, b, l) {
+    let sum = 0;
+    for (let i = 0; i < l.length; i++) {
+        if (l[i] % a === 0 || l[i] % b === 0) {
+            sum += l[i];
+        }
+    }
+    return sum;
+}
+
+function calculateSum() {
+    let a = parseInt(document.getElementById("a4").value);
+    let b = parseInt(document.getElementById("b4").value);
+
+    let result = f4(a, b, array);
+    alert("Sum of multiples of " + a + " or " + b + " is: " + result);
+}
+
+//Exercise 4.1
+
+function f4(a, b, l) {
+            let sum = 0;
+            for (let i = 0; i < l.length; i++) {
+                if (l[i] % a === 0 || l[i] % b === 0) {
+                    sum += l[i];
                 }
-                let doIt=()=>alert("Not Implemented!");
+            }
+            return sum;
+        }
+
+        function handleF41() {
+            let a = parseInt(document.getElementById("a41").value);
+            let b = parseInt(document.getElementById("b41").value);
+            let l = document.getElementById("l41").value.split(",").map(Number);
+
+            if (isNaN(a) || isNaN(b)) {
+                alert("Please enter valid numbers for a and b.");
+                return;
+            }
+
+            let result = f4(a, b, l);
+            alert("Sum of multiples of " + a + " or " + b + " in the array is: " + result);
+        }
+
+// Exercise 5: Function f5
+function f5(aArr, lArr) {
+      let sum = 0;
+      for (let i = 0; i < lArr.length; i++) {
+        for (let j = 0; j < aArr.length; j++) {
+          if (lArr[i] % aArr[j] === 0) {
+            sum += lArr[i];
+            break;
+          }
+        }
+      }
+      return sum;
+    }
+
+    function handleF5() {
+      let a = document.getElementById("a5").value.split(",").map(Number);
+      let l = document.getElementById("l5").value.split(",").map(Number);
+
+      if (a.some(isNaN) || l.some(isNaN)) {
+        alert("Please enter valid comma-separated numbers in both inputs.");
+        return;
+      }
+
+      let result = f5(a, l);
+      alert("Exercise 5 Result: " + result);
+    }
+
+//Exercise 6:
+    function f6(aArr, lArr) {
+      let sum = 0;
+      for (let i = 0; i < lArr.length; i++) {
+        for (let j = 0; j < aArr.length; j++) {
+          if (lArr[i] % aArr[j] === 0) {
+            sum += lArr[i];
+            break;
+          }
+        }
+      }
+      return sum;
+    }
+
+    function handleF6() {
+      let a = document.getElementById("a6").value.split(",").map(Number);
+      let l = document.getElementById("l6").value.split(",").map(Number);
+
+      if (a.some(isNaN) || l.some(isNaN)) {
+        alert("Please enter valid comma-separated numbers in both inputs.");
+        return;
+      }
+
+      let result = f6(a, l);
+      alert("The Sum of multiples of array a found in l is " + result);
+    }
+
+//Exercise 7
+    function f7(basket, prices) {
+      let total = 0;
+      for (let item in basket) {
+        if (prices[item]) {
+          total += basket[item] * prices[item];
+        } else {
+          console.warn("Price not available for:", item);
+        }
+      }
+      return total.toFixed(2);
+    }
+
+    // Helper: convert user input string into an object
+    function parseInputToObject(input, isPrice = false) {
+      let obj = {};
+      let items = input.split(",");
+      for (let pair of items) {
+        let [key, value] = pair.split(":");
+        if (key && value && !isNaN(value)) {
+          obj[key.trim()] = isPrice ? parseFloat(value) : parseInt(value);
+        }
+      }
+      return obj;
+    }
+
+    // Event handler for button
+    function handleF7() {
+      const basketText = document.getElementById("basketInput").value;
+      const pricesText = document.getElementById("pricesInput").value;
+
+      const basket = parseInputToObject(basketText);
+      const prices = parseInputToObject(pricesText, true); // prices use float
+
+      const total = f7(basket, prices);
+      document.getElementById("output").innerText = "Total Basket Cost: €" + total;
+    }
         </script>
     </head>
     <body>
@@ -20,7 +200,7 @@
 
     <p>Hello World!</p>
     <input type="text" id="in">
-    <button onclick='c()'>Press Me</button>
+    <button onclick='c()'>Check Weight</button>
     
 
 
@@ -42,24 +222,63 @@
         <p>Create a function to return the sum of all the multiples of a or b below n</p>
         <p>Call the function and alert the user to the correct answer when they press the button.</p>
 </p>
+<label for="a">Enter a: </label>
+<input type="number" id="a"><br><br>
 
+<label for="b">Enter b: </label>
+<input type="number" id="b"><br><br>
 
+<label for="n">Enter n: </label>
+<input type="number" id="n"><br><br>
 
+<button onclick="showSum()">Calculate Sum</button>
 
 <p>Exercise 4, Arrays: f4 should take 2 integer and 1 array parameters and return an integer.</p>
 <p>Create a function f4 to return the sum of all the multiples of a or b in array l</p>
+<h2>Sum of Multiples of A or B in a Predefined Array</h2>
+
+<label for="a4">Enter value for A:</label>
+<input type="number" id="a4"><br><br>
+
+<label for="b4">Enter value for B:</label>
+<input type="number" id="b4"><br><br>
+
+<button onclick="calculateSum()">Calculate Sum</button>
+
+
 <p>(Exercise 4.1) Create a page with a button and three input boxes, labelled a, b and l, l should be a large input</p>
 <p>Call the function f4 in the function called by onClick, and alert the user to the 
-    returned answer when they press the button.</p>        
+    returned answer when they press the button.</p>  
+    <p>Enter two numbers and a list of numbers (comma-separated):</p>
+    <label for="a41">Enter a:</label>
+    <input type="number" id="a41"><br><br>
+
+    <label for="b41">Enter b:</label>
+    <input type="number" id="b41"><br><br>
+
+    <label for="l41">Enter list (comma-separated):</label>
+    <input type="text" id="l41"><br><br>
+
+    <button onclick="handleF41()">Calculate f4</button>
     
 <p>Exercise 5, Arrays: f5 should take array parameters and return an integer.</p>
 <p>Create a function f5 to return the sum of all the multiples of factors in a 
     found in in l (a and l should be arrays of integers, a is of length 2)</p>
+
 <p>(Exercise 5.1) Create a page with a button and two wide input boxes, labelled a and l</p>
 <p>Call the function f5 in the function called by onClick, and alert the user to the 
     returned answer when they press the button.</p>
 </p>
 <p>You may find the split function useful for creating arrays from the strings entered: <a href="https://www.w3schools.com/jsref/jsref_split.asp">Split</a></p>
+
+<p>Function f5 returns the sum of all the multiples of factors in array a found in array l.</p>
+  <label>Array a (e.g. 3,5):</label><br>
+  <input type="text" id="a5" placeholder="Enter array a"><br><br>
+
+  <label>Array l (e.g. 10,15,20,7):</label><br>
+  <input type="text" id="l5" placeholder="Enter array l"><br><br>
+
+  <button onclick="handleF5()">Calculate Sum</button>
 
 <p>Exercise 6, Arrays: f6 should take array parameters and return an integer.</p>
 <p>Create a function f6 to return the sum of all the multiples of factors in a 
@@ -70,7 +289,35 @@
 </p>
 <p>You may find the split function useful for creating arrays from the strings entered: <a href="https://www.w3schools.com/jsref/jsref_split.asp">Split</a></p>
 
+ <h2>Exercise 6 / 6.1</h2>
+  <p>Function f6 also returns the sum of all the multiples of factors in a found in l (general form).</p>
+  <label>Array a (e.g. 2,4,6):</label><br>
+  <input type="text" id="a6" placeholder="Enter array a"><br><br>
+
+  <label>Array l (e.g. 8,12,18,9):</label><br>
+  <input type="text" id="l6" placeholder="Enter array l"><br><br>
+
+  <button onclick="handleF6()">Calculate Sum</button>
+
 <input type="text" id="nums"> <button onclick="mapNums()">Press me!</button>
 
-    </body>
+Exercise 7, Objects as dictionaries/hashtables:</p>
+<p>Create a function, f7, that takes two parameters, basket and prices</p>
+<p>f7 should compute the cost of the basket given the prices supplied.</p>
+<p>basket should be an object holding product:quantity (string:int) pairs</p>
+<p>prices should be an object holding product:price (string:float) pairs</p>
+
+  <h2>Exercise 7.1 – Calculate Basket Total</h2>
+
+  <p><strong>Enter Basket:</strong> (e.g. <code>apple:2,banana:3</code>)</p>
+  <input type="text" id="basketInput" placeholder="product:quantity,product:quantity"><br><br>
+
+  <p><strong>Enter Prices:</strong> (e.g. <code>apple:0.5,banana:0.3</code>)</p>
+  <input type="text" id="pricesInput" placeholder="product:price,product:price"><br><br>
+
+  <button onclick="handleF7()">Calculate Total</button>
+
+  <p id="output"></p>
+  
+    </body>
 </html>
